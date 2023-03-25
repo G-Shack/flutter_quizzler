@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Quizzler());
+  runApp(const Quizzler());
 }
 
 class Quizzler extends StatelessWidget {
@@ -13,7 +13,7 @@ class Quizzler extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
-        body: SafeArea(
+        body: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
             child: QuizPage(),
@@ -32,6 +32,13 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [];
+  List<String> questions = [
+    'You can lead a cow downstairs but not upstairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.'
+  ];
+  int queNo = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question will go!',
+                questions[0],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -56,12 +63,16 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  queNo++;
+                });
+              },
               style: TextButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: Colors.green),
-              child: Text(
+              child: const Text(
                 'True',
                 style: TextStyle(color: Colors.white, fontSize: 20.0),
               ),
@@ -70,12 +81,16 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  queNo++;
+                });
+              },
               style: TextButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: Colors.red),
-              child: Text(
+              child: const Text(
                 'False',
                 style: TextStyle(color: Colors.white, fontSize: 20.0),
               ),
