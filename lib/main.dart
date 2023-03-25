@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() {
   runApp(const Quizzler());
@@ -33,12 +34,20 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
-  List<String> questions = [
-    'You can lead a cow downstairs but not upstairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
+
+  // List<String> questions = [
+  //   'You can lead a cow downstairs but not upstairs.',
+  //   'Approximately one quarter of human bones are in the feet.',
+  //   'A slug\'s blood is green.'
+  // ];
+  // List<bool> answers = [false, true, true];
+
+  List<Question> questionBank = [
+    Question('You can lead a cow downstairs but not upstairs.', false),
+    Question('Approximately one quarter of human bones are in the feet.', true),
+    Question('A slug\'s blood is green', true)
   ];
-  List<bool> answers = [false, true, true];
+
   int queNo = 0;
   @override
   Widget build(BuildContext context) {
@@ -52,7 +61,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[0],
+                questionBank[queNo].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -67,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = answers[queNo];
+                bool correctAns = questionBank[queNo].questionAnswer;
                 if (correctAns == true) {
                   print('Correct Ans');
                 } else {
@@ -91,7 +100,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = answers[queNo];
+                bool correctAns = questionBank[queNo].questionAnswer;
                 if (correctAns == false) {
                   print('Correct Ans');
                 } else {
