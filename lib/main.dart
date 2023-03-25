@@ -37,6 +37,27 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
+  void checkAnswer(bool userAnswer) {
+    setState(() {
+      if (userAnswer == quizBrain.getQuestionAnswer()) {
+        scoreKeeper.add(
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        );
+      } else {
+        scoreKeeper.add(
+          Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+        );
+      }
+      quizBrain.nextQuestion();
+    });
+  }
+
   // List<String> questions = [
   //   'You can lead a cow downstairs but not upstairs.',
   //   'Approximately one quarter of human bones are in the feet.',
@@ -71,15 +92,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = quizBrain.getQuestionAnswer();
-                if (correctAns == true) {
-                  print('Correct Ans');
-                } else {
-                  print('Wrong answer!');
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(true);
               },
               style: TextButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: Colors.green),
@@ -95,15 +108,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = quizBrain.getQuestionAnswer();
-                if (correctAns == false) {
-                  print('Correct Ans');
-                } else {
-                  print('Wrong answer!');
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
+                checkAnswer(false);
               },
               style: TextButton.styleFrom(
                   foregroundColor: Colors.white, backgroundColor: Colors.red),
@@ -114,6 +119,9 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        Row(
+          children: scoreKeeper,
+        )
       ],
     );
   }
