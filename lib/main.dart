@@ -44,7 +44,6 @@ class _QuizPageState extends State<QuizPage> {
   // ];
   // List<bool> answers = [false, true, true];
 
-  int queNo = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,7 +56,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(queNo),
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
@@ -72,14 +71,14 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = quizBrain.getQuestionAnswer(queNo);
+                bool correctAns = quizBrain.getQuestionAnswer();
                 if (correctAns == true) {
                   print('Correct Ans');
                 } else {
                   print('Wrong answer!');
                 }
                 setState(() {
-                  queNo++;
+                  quizBrain.nextQuestion();
                 });
               },
               style: TextButton.styleFrom(
@@ -96,14 +95,14 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
-                bool correctAns = quizBrain.getQuestionAnswer(queNo);
+                bool correctAns = quizBrain.getQuestionAnswer();
                 if (correctAns == false) {
                   print('Correct Ans');
                 } else {
                   print('Wrong answer!');
                 }
                 setState(() {
-                  queNo++;
+                  quizBrain.nextQuestion();
                 });
               },
               style: TextButton.styleFrom(
