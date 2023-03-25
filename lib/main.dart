@@ -38,6 +38,7 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.'
   ];
+  List<bool> answers = [false, true, true];
   int queNo = 0;
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,12 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
+                bool correctAns = answers[queNo];
+                if (correctAns == true) {
+                  print('Correct Ans');
+                } else {
+                  print('Wrong answer!');
+                }
                 setState(() {
                   queNo++;
                 });
@@ -84,6 +91,12 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               onPressed: () {
+                bool correctAns = answers[queNo];
+                if (correctAns == false) {
+                  print('Correct Ans');
+                } else {
+                  print('Wrong answer!');
+                }
                 setState(() {
                   queNo++;
                 });
